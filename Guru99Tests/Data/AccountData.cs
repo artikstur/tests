@@ -1,4 +1,4 @@
-﻿namespace Guru99Tests
+﻿namespace Guru99Tests.Data
 {
     public class AccountData
     {
