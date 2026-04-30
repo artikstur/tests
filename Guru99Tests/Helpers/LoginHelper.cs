@@ -12,11 +12,27 @@ namespace Guru99Tests.Helpers
 
         public void Login(AccountData user)
         {
-            FillTheField(By.Name("uid"), user.Username);
-            FillTheField(By.Name("password"), user.Password);
+            if (IsElementPresent(By.Name("uid")))
+            {
+                FillTheField(By.Name("uid"), user.Username);
+                FillTheField(By.Name("password"), user.Password);
 
-            driver.FindElement(By.Name("btnLogin")).Click();
-            Thread.Sleep(2000);
+                driver.FindElement(By.Name("btnLogin")).Click();
+                Thread.Sleep(2000);
+            }
+        }
+
+        private bool IsElementPresent(By locator)
+        {
+            try
+            {
+                driver.FindElement(locator);
+                return true;
+            }
+            catch (NoSuchElementException)
+            {
+                return false;
+            }
         }
     }
 }

@@ -13,7 +13,9 @@ namespace Guru99Tests
         protected LoginHelper auth;
         protected ContactHelper contact;
 
-        public AppManager()
+        private static ThreadLocal<AppManager> app = new ThreadLocal<AppManager>();
+
+        private AppManager()
         {
             driver = new ChromeDriver();
             driver.Manage().Window.Size = new System.Drawing.Size(1200, 1100);
@@ -24,15 +26,31 @@ namespace Guru99Tests
             contact = new ContactHelper(this);
         }
 
+        public static AppManager GetInstance()
+        {
+            if (!app.IsValueCreated)
+            {
+                AppManager newInstance = new AppManager();
+                newInstance.Navigation.OpenHomePage();
+                app.Value = newInstance;
+            }
+            return app.Value;
+        }
+
         public IWebDriver Driver { get { return driver; } }
         public NavigationHelper Navigation { get { return navigation; } }
         public LoginHelper Auth { get { return auth; } }
         public ContactHelper Contact { get { return contact; } }
 
-        public void Stop()
+        ~AppManager()
         {
-            driver.Quit();
-            driver.Dispose();
+            try
+            {
+                driver.Quit();
+                driver.Dispose();
+            }
+            catch (Exception)
+            {   }
         }
     }
 }

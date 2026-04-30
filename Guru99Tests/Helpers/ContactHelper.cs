@@ -83,5 +83,27 @@ namespace Guru99Tests.Helpers
             submitBtn.Click();
             Thread.Sleep(3000);
         }
+
+        public CustomerData GetCreatedCustomerData()
+        {
+            try
+            {
+                string name = driver.FindElement(By.XPath("//td[text()='Customer Name']/following-sibling::td")).Text;
+                string address = driver.FindElement(By.XPath("//td[text()='Address']/following-sibling::td")).Text;
+                string city = driver.FindElement(By.XPath("//td[text()='City']/following-sibling::td")).Text;
+                string state = driver.FindElement(By.XPath("//td[text()='State']/following-sibling::td")).Text;
+
+                return new CustomerData(name)
+                {
+                    Address = address,
+                    City = city,
+                    State = state
+                };
+            }
+            catch (NoSuchElementException)
+            {
+                return null;
+            }
+        }
     }
 }
