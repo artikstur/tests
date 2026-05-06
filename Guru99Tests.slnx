@@ -1,3 +1,4 @@
 <Solution>
+  <Project Path="addressbook-test-data-generators/addressbook-test-data-generators.csproj" Id="f5a39077-b4b6-4572-b2c0-000ee7d238d9" />
   <Project Path="Guru99Tests/Guru99Tests.csproj" />
 </Solution>

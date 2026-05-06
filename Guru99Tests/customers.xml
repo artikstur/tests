@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfCustomerData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <CustomerData>
+    <Name>wQP</Name>
+    <Dob>01042026</Dob>
+    <Address>gVGcjWGL</Address>
+    <City>PgyQy</City>
+    <State>smhK</State>
+    <Pin>123123</Pin>
+    <Mobile>123456789</Mobile>
+    <Email>RypYm@email.ru</Email>
+    <Password>pass</Password>
+  </CustomerData>
+  <CustomerData>
+    <Name>DGz</Name>
+    <Dob>01042026</Dob>
+    <Address>AsiL</Address>
+    <City>seVo</City>
+    <State>UVOi</State>
+    <Pin>123123</Pin>
+    <Mobile>123456789</Mobile>
+    <Email>AYu@email.ru</Email>
+    <Password>pass</Password>
+  </CustomerData>
+  <CustomerData>
+    <Name>MpZw</Name>
+    <Dob>01042026</Dob>
+    <Address>rTi</Address>
+    <City>CznD</City>
+    <State>Wydzga</State>
+    <Pin>123123</Pin>
+    <Mobile>123456789</Mobile>
+    <Email>EcUxY@email.ru</Email>
+    <Password>pass</Password>
+  </CustomerData>
+</ArrayOfCustomerData>
