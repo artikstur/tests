@@ -19,7 +19,7 @@ namespace Guru99Tests
         {
             driver = new ChromeDriver();
             driver.Manage().Window.Size = new System.Drawing.Size(1200, 1100);
-            baseURL = "https://demo.guru99.com/V4/";
+            baseURL = Settings.Settings.BaseURL;
 
             navigation = new NavigationHelper(this, baseURL);
             auth = new LoginHelper(this);

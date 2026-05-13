@@ -1,25 +1,21 @@
 using System.Xml.Serialization;
-using Guru99Tests.Base;
+using Guru99Tests.Base; 
 using Guru99Tests.Data;
 
-namespace Guru99Tests.Tests
-{
-    [TestFixture]
-    public class CreateContactTest : TestBase
-    {
-        public static IEnumerable<CustomerData> CustomerDataFromXmlFile()
-        {
-            return (List<CustomerData>)new XmlSerializer(typeof(List<CustomerData>))
-                .Deserialize(new StreamReader(Path.Combine(TestContext.CurrentContext.TestDirectory, @"customers.xml")));
+namespace Guru99Tests.Tests 
+{ 
+    [TestFixture] 
+    public class CreateContactTest : AuthBase
+    { 
+        public static IEnumerable<CustomerData> CustomerDataFromXmlFile() 
+        { 
+            return (List<CustomerData>)new XmlSerializer(typeof(List<CustomerData>)) 
+                .Deserialize(new StreamReader(Path.Combine(TestContext.CurrentContext.TestDirectory, @"customers.xml"))); 
         }
 
         [Test, TestCaseSource(nameof(CustomerDataFromXmlFile))]
         public void createContactTest(CustomerData customer)
         {
-            app.Navigation.OpenHomePage();
-
-            AccountData admin = new AccountData("mngr659011", "byturEg");
-            app.Auth.Login(admin);
 
             app.Navigation.GoToNewCustomerPage();
             app.Contact.CreateContact(customer);

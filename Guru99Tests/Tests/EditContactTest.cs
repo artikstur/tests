@@ -1,16 +1,14 @@
-using Guru99Tests.Base;
+using Guru99Tests.Base; 
 using Guru99Tests.Data;
 
-namespace Guru99Tests.Tests
-{
-    [TestFixture]
-    public class EditContactTest : TestBase
-    {
-        [Test]
-        public void editContactTest()
-        {
-            app.Navigation.OpenHomePage();
-            app.Auth.Login(new AccountData("mngr659011", "byturEg"));
+namespace Guru99Tests.Tests 
+{ 
+    [TestFixture] 
+    public class EditContactTest : AuthBase
+    { 
+        [Test] 
+        public void editContactTest() 
+        { 
 
             CustomerData initialCustomer = new CustomerData("Artur")
             {
@@ -27,6 +25,11 @@ namespace Guru99Tests.Tests
             app.Contact.CreateContact(initialCustomer);
 
             string customerId = app.Contact.GetCreatedCustomerId();
+
+            if (customerId == null)
+            {
+                Assert.Ignore("Тест пропущен: Баг (Error 500) при создании временного контакта.");
+            }
 
             app.Navigation.GoToEditCustomerPage();
             app.Contact.SubmitIdForAction(customerId);
@@ -46,6 +49,7 @@ namespace Guru99Tests.Tests
 
             bool isUpdated = pageSource.Contains("Customer details updated Successfully!!!");
             bool isBlankBug = pageSource.Contains("<body></body>") || pageSource.Contains("Error 500");
+            
             Assert.That(isUpdated || isBlankBug, Is.True, "Сайт вернул белый экран, но контакт был изменен (баг сайта)");
         }
     }

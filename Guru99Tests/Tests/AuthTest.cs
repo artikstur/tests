@@ -1,20 +1,35 @@
-using Guru99Tests.Base;
+using OpenQA.Selenium;
+using Guru99Tests.Base; 
 using Guru99Tests.Data;
 
-namespace Guru99Tests.Tests
-{
-    [TestFixture]
-    public class AuthTest : TestBase
+namespace Guru99Tests.Tests 
+{ 
+    [TestFixture] 
+    public class AuthTest : TestBase 
     {
-        [Test]
-        public void authTest()
-        {
-            app.Navigation.OpenHomePage();
+        [Test] 
+        public void LoginWithValidData() 
+        { 
+            app.Auth.Logout();
 
-            AccountData admin = new AccountData("mngr659011", "byturEg");
+            AccountData admin = new AccountData(Settings.Settings.Login, Settings.Settings.Password);
             app.Auth.Login(admin);
 
-            Assert.That(app.Driver.PageSource, Does.Contain("Manger Id : mngr659011"));
+            Assert.That(app.Auth.IsLoggedIn(admin.Username), Is.True);
+        }
+
+        [Test]
+        public void LoginWithInvalidData()
+        {
+            app.Auth.Logout();
+
+            AccountData invalidUser = new AccountData("invalid", "invalid");
+            app.Auth.Login(invalidUser);
+
+            try { app.Driver.SwitchTo().Alert().Accept(); }
+            catch (NoAlertPresentException) { }
+
+            Assert.That(app.Auth.IsLoggedIn(), Is.False);
         }
     }
 }
